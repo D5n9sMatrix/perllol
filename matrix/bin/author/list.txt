@@ -1,0 +1,6 @@
+perldata, perlref, perldsc
+AUTHOR
+
+Tom Christiansen <tchrist@perl.com>
+
+Last update: Tue Apr 26 18:30:55 MDT 2011
