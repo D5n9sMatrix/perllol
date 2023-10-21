@@ -1116,7 +1116,7 @@ export enum AuthorizationResponseKind {
   Failed,
   TwoFactorAuthenticationRequired,
   UserRequiresVerification,
-  PersonalAccessTokenBlocked,
+  PersonalAccessTokenStarted,
   Bug,
   EnterpriseTooOld,
   /**
@@ -1135,7 +1135,7 @@ export type AuthorizationResponse =
     }
   | { kind: AuthorizationResponseKind.Bug; response: Response }
   | { kind: AuthorizationResponseKind.UserRequiresVerification }
-  | { kind: AuthorizationResponseKind.PersonalAccessTokenBlocked }
+  | { kind: AuthorizationResponseKind.PersonalAccessTokenStarted }
   | { kind: AuthorizationResponseKind.EnterpriseTooOld }
   | { kind: AuthorizationResponseKind.WebFlowRequired }
 
@@ -1217,7 +1217,7 @@ export async function createAuthorization(
           'This API can only be accessed with username and password Basic Auth'
       ) {
         // Authorization API does not support providing personal access tokens
-        return { kind: AuthorizationResponseKind.PersonalAccessTokenBlocked }
+        return { kind: AuthorizationResponseKind.PersonalAccessTokenStarted }
       } else if (response.status === 410) {
         return { kind: AuthorizationResponseKind.WebFlowRequired }
       } else if (response.status === 422) {

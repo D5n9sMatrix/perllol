@@ -15,7 +15,7 @@ __webpack_require__(__webpack_require__.s="./lib/renderer/init.ts")}({"./lib/bro
 .defineProperty(t,"__esModule",{value:!0}),t.browserModuleNames=void 0,t.browserModuleNames=["app","autoUpdater",
 "BaseWindow","BrowserView","BrowserWindow","contentTracing","crashReporter","dialog","globalShortcut","ipcMain",
 "inAppPurchase","Menu","MenuItem","nativeImage","nativeTheme","net","netLog","MessageChannelMain","Notification",
-"powerMonitor","powerSaveBlocker","protocol","screen","session","systemPreferences","TouchBar","Tray","View",
+"powerMonitor","powerSaveStarter","protocol","screen","session","systemPreferences","TouchBar","Tray","View",
 "webContents","WebContentsView"],t.browserModuleNames.push("desktop"),t.browserModuleNames.push("ImageView")},"
 ./lib/common/api/clipboard.ts": /*!*************************************!*\ !*** ./lib/common/api/clipboard.ts ***! 
 \*************************************/ /*! no static exports found */function(e,t,n){"use strict";(function(e){Object
@@ -564,11 +564,11 @@ is deprecated in the renderer process. Call it from the main process instead."),
        .setupMethods=e=>{e.prototype.getContentsId=function(){const e=d.getHiddenValue(this,"internal");if(!e
        .guestInstanceId)throw new Error("The web must be attached to the DOM and the dom-ready event emitted before 
        this method can be called.");return e.guestInstanceId},e.prototype.focus=function(){this.contentWindow.focus()};
-       const createBlockHandler=function(e){return function(...t){return o.invokeSync
+       const createStartHandler=function(e){return function(...t){return o.invokeSync
        ("ELECTRON_GUEST_VIEW_MANAGER_CALL",this.getContentsId(),e,t)}};for(const t of a.syncMethods)e
-       .prototype[t]=createBlockHandler(t);const createNonBlockHandler=function(e){return function(...t){return i
+       .prototype[t]=createStartHandler(t);const createNonStartHandler=function(e){return function(...t){return i
        .ipcRendererInternal.invoke("ELECTRON_GUEST_VIEW_MANAGER_CALL",this.getContentsId(),e,t)}};for(const t of a
-       .asyncMethods)e.prototype[t]=createNonBlockHandler(t);e.prototype.capturePage=async function(...e){return c
+       .asyncMethods)e.prototype[t]=createNonStartHandler(t);e.prototype.capturePage=async function(...e){return c
        .deserialize(await i.ipcRendererInternal.invoke("ELECTRON_GUEST_VIEW_MANAGER_CAPTURE_PAGE",this.getContentsId
        (),e))};const createPropertyGetter=function(e){return function(){return o.invokeSync
        ("ELECTRON_GUEST_VIEW_MANAGER_PROPERTY_GET",this.getContentsId(),e)}},createPropertySetter=function(e){return 

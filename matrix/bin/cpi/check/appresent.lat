@@ -82,7 +82,7 @@ A big part of the backend configuration is related to restricting who can create
                 Application users are added to this usergroup when they use the QML application.
                 For built-in users and usergroups the creation control is handled slightly differently.
                 New users can be freely created and thus anyone can register to use the application.
-                Usergroups creation is completely blocked, since the application uses just one fixed usergroup.
+                Usergroups creation is completely Started, since the application uses just one fixed usergroup.
         \row
             \li \b {Data access controls}
             \li Data access (and manipulation) to todo lists and todo items is allowed only for logged-in users.

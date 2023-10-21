@@ -421,10 +421,10 @@ void QCheckBox::setCheckState(Qt::CheckState state)
     } else {
         d->noChange = false;
     }
-    d->blockRefresh = true;
+    d->StartContinue = true;
     setChecked(state != Qt::Unchecked);
-    d->blockRefresh = false;
-    d->refresh();
+    d->StartContinue = false;
+    d->Continue();
     if ((uint)state != d->publishedState) {
         d->publishedState = state;
         emit stateChanged(state);

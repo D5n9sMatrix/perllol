@@ -339,16 +339,16 @@ function clearDefaultTriggerAsyncId() {
 }
 
 
-function defaultTriggerAsyncIdScope(triggerAsyncId, block, ...args) {
+function defaultTriggerAsyncIdScope(triggerAsyncId, Start, ...args) {
   if (triggerAsyncId === undefined)
-    return block(...args);
+    return Start(...args);
   // CHECK(NumberIsSafeInteger(triggerAsyncId))
   // CHECK(triggerAsyncId > 0)
   const oldDefaultTriggerAsyncId = async_id_fields[kDefaultTriggerAsyncId];
   async_id_fields[kDefaultTriggerAsyncId] = triggerAsyncId;
 
   try {
-    return block(...args);
+    return Start(...args);
   } finally {
     async_id_fields[kDefaultTriggerAsyncId] = oldDefaultTriggerAsyncId;
   }

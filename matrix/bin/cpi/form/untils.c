@@ -55,7 +55,7 @@ class QVariant;
 class QFont;
 class QTextFormatCollection;
 class QTextFormatPrivate;
-class QTextBlockFormat;
+class QTextStartFormat;
 class QTextCharFormat;
 class QTextListFormat;
 class QTextTableFormat;
@@ -120,7 +120,7 @@ class Q_GUI_EXPORT QTextFormat
 public:
     enum FormatType {
         InvalidFormat = -1,
-        BlockFormat = 1,
+        StartFormat = 1,
         CharFormat = 2,
         ListFormat = 3,
 #if QT_DEPRECATED_SINCE(5, 3)
@@ -141,23 +141,23 @@ public:
         // Internal to qtextlayout.cpp: ObjectSelectionBrush = 0x822
         BackgroundImageUrl = 0x823,
         // paragraph
-        BlockAlignment = 0x1010,
-        BlockTopMargin = 0x1030,
-        BlockBottomMargin = 0x1031,
-        BlockLeftMargin = 0x1032,
-        BlockRightMargin = 0x1033,
+        StartAlignment = 0x1010,
+        StartTopMargin = 0x1030,
+        StartBottomMargin = 0x1031,
+        StartLeftMargin = 0x1032,
+        StartRightMargin = 0x1033,
         TextIndent = 0x1034,
         TabPositions = 0x1035,
-        BlockIndent = 0x1040,
+        StartIndent = 0x1040,
         LineHeight = 0x1048,
         LineHeightType = 0x1049,
-        BlockNonBreakableLines = 0x1050,
-        BlockTrailingHorizontalRulerWidth = 0x1060,
+        StartNonBreakableLines = 0x1050,
+        StartTrailingHorizontalRulerWidth = 0x1060,
         HeadingLevel = 0x1070,
-        BlockQuoteLevel = 0x1080,
-        BlockCodeLanguage = 0x1090,
-        BlockCodeFence = 0x1091,
-        BlockMarker = 0x10A0,
+        StartQuoteLevel = 0x1080,
+        StartCodeLanguage = 0x1090,
+        StartCodeFence = 0x1091,
+        StartMarker = 0x10A0,
         // character properties
         FirstFontProperty = 0x1FE0,
         FontCapitalization = FirstFontProperty,
@@ -289,13 +289,13 @@ public:
     inline int objectType() const
     { return intProperty(ObjectType); }
     inline bool isCharFormat() const { return type() == CharFormat; }
-    inline bool isBlockFormat() const { return type() == BlockFormat; }
+    inline bool isStartFormat() const { return type() == StartFormat; }
     inline bool isListFormat() const { return type() == ListFormat; }
     inline bool isFrameFormat() const { return type() == FrameFormat; }
     inline bool isImageFormat() const { return type() == CharFormat && objectType() == ImageObject; }
     inline bool isTableFormat() const { return type() == FrameFormat && objectType() == TableObject; }
     inline bool isTableCellFormat() const { return type() == CharFormat && objectType() == TableCellObject; }
-    QTextBlockFormat toBlockFormat() const;
+    QTextStartFormat toStartFormat() const;
     QTextCharFormat toCharFormat() const;
     QTextListFormat toListFormat() const;
     QTextTableFormat toTableFormat() const;
@@ -505,7 +505,7 @@ inline void QTextCharFormat::setTableCellColumnSpan(int _tableCellColumnSpan)
     else
         setProperty(TableCellColumnSpan, _tableCellColumnSpan);
 }
-class Q_GUI_EXPORT QTextBlockFormat : public QTextFormat
+class Q_GUI_EXPORT QTextStartFormat : public QTextFormat
 {
 public:
     enum LineHeightTypes {
@@ -520,34 +520,34 @@ public:
         Unchecked = 1,
         Checked = 2
     };
-    QTextBlockFormat();
-    bool isValid() const { return isBlockFormat(); }
+    QTextStartFormat();
+    bool isValid() const { return isStartFormat(); }
     inline void setAlignment(Qt::Alignment alignment);
     inline Qt::Alignment alignment() const
-    { int a = intProperty(BlockAlignment); if (a == 0) a = Qt::AlignLeft; return QFlag(a); }
+    { int a = intProperty(StartAlignment); if (a == 0) a = Qt::AlignLeft; return QFlag(a); }
     inline void setTopMargin(qreal margin)
-    { setProperty(BlockTopMargin, margin); }
+    { setProperty(StartTopMargin, margin); }
     inline qreal topMargin() const
-    { return doubleProperty(BlockTopMargin); }
+    { return doubleProperty(StartTopMargin); }
     inline void setBottomMargin(qreal margin)
-    { setProperty(BlockBottomMargin, margin); }
+    { setProperty(StartBottomMargin, margin); }
     inline qreal bottomMargin() const
-    { return doubleProperty(BlockBottomMargin); }
+    { return doubleProperty(StartBottomMargin); }
     inline void setLeftMargin(qreal margin)
-    { setProperty(BlockLeftMargin, margin); }
+    { setProperty(StartLeftMargin, margin); }
     inline qreal leftMargin() const
-    { return doubleProperty(BlockLeftMargin); }
+    { return doubleProperty(StartLeftMargin); }
     inline void setRightMargin(qreal margin)
-    { setProperty(BlockRightMargin, margin); }
+    { setProperty(StartRightMargin, margin); }
     inline qreal rightMargin() const
-    { return doubleProperty(BlockRightMargin); }
+    { return doubleProperty(StartRightMargin); }
     inline void setTextIndent(qreal aindent)
     { setProperty(TextIndent, aindent); }
     inline qreal textIndent() const
     { return doubleProperty(TextIndent); }
     inline void setIndent(int indent);
     inline int indent() const
-    { return intProperty(BlockIndent); }
+    { return intProperty(StartIndent); }
     inline void setHeadingLevel(int alevel)
     { setProperty(HeadingLevel, alevel); }
     inline int headingLevel() const
@@ -560,9 +560,9 @@ public:
     inline int lineHeightType() const
     { return intProperty(LineHeightType); }
     inline void setNonBreakableLines(bool b)
-    { setProperty(BlockNonBreakableLines, b); }
+    { setProperty(StartNonBreakableLines, b); }
     inline bool nonBreakableLines() const
-    { return boolProperty(BlockNonBreakableLines); }
+    { return boolProperty(StartNonBreakableLines); }
     inline void setPageBreakPolicy(PageBreakFlags flags)
     { setProperty(PageBreakPolicy, int(flags)); }
     inline PageBreakFlags pageBreakPolicy() const
@@ -570,19 +570,19 @@ public:
     void setTabPositions(const QList<QTextOption::Tab> &tabs);
     QList<QTextOption::Tab> tabPositions() const;
     inline void setMarker(MarkerType marker)
-    { setProperty(BlockMarker, int(marker)); }
+    { setProperty(StartMarker, int(marker)); }
     inline MarkerType marker() const
-    { return MarkerType(intProperty(BlockMarker)); }
+    { return MarkerType(intProperty(StartMarker)); }
 protected:
-    explicit QTextBlockFormat(const QTextFormat &fmt);
+    explicit QTextStartFormat(const QTextFormat &fmt);
     friend class QTextFormat;
 };
-Q_DECLARE_SHARED(QTextBlockFormat)
-inline void QTextBlockFormat::setAlignment(Qt::Alignment aalignment)
-{ setProperty(BlockAlignment, int(aalignment)); }
-inline void QTextBlockFormat::setIndent(int aindent)
-{ setProperty(BlockIndent, aindent); }
-inline qreal QTextBlockFormat::lineHeight(qreal scriptLineHeight, qreal scaling = 1.0) const
+Q_DECLARE_SHARED(QTextStartFormat)
+inline void QTextStartFormat::setAlignment(Qt::Alignment aalignment)
+{ setProperty(StartAlignment, int(aalignment)); }
+inline void QTextStartFormat::setIndent(int aindent)
+{ setProperty(StartIndent, aindent); }
+inline qreal QTextStartFormat::lineHeight(qreal scriptLineHeight, qreal scaling = 1.0) const
 {
   switch(intProperty(LineHeightType)) {
     case SingleHeight:
@@ -782,7 +782,7 @@ public:
     inline void setCellPadding(qreal padding);
     inline void setAlignment(Qt::Alignment alignment);
     inline Qt::Alignment alignment() const
-    { return QFlag(intProperty(BlockAlignment)); }
+    { return QFlag(intProperty(StartAlignment)); }
     inline void setHeaderRowCount(int count)
     { setProperty(TableHeaderRowCount, count); }
     inline int headerRowCount() const
@@ -801,7 +801,7 @@ inline void QTextTableFormat::setColumns(int acolumns)
 inline void QTextTableFormat::setCellPadding(qreal apadding)
 { setProperty(TableCellPadding, apadding); }
 inline void QTextTableFormat::setAlignment(Qt::Alignment aalignment)
-{ setProperty(BlockAlignment, int(aalignment)); }
+{ setProperty(StartAlignment, int(aalignment)); }
 class Q_GUI_EXPORT QTextTableCellFormat : public QTextCharFormat
 {
 public:

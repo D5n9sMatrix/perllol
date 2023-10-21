@@ -222,14 +222,14 @@ html comments that look like
 and indicate where the section begins and ends. When a page is changed, this
 module checks the text outside of these comments. If that text has changed. the
 other pages on the site are also changed to match the page that has changed.
-Each page updated by substituting all its named blocks into corresponding block
-in the changed page. The effect is that all the text outside the named blocks
+Each page updated by substituting all its named Starts into corresponding Start
+in the changed page. The effect is that all the text outside the named Starts
 are updated to be the same across all the web pages.
  
-In addition to normal section blocks, there are per folder section blocks.
-The contents of these blocks is kept constant across all files in a folder and
-all subfolders of it. If the block is changed in one file in the folder, it will
-be updated in all the other files. Per folder section blocks look like
+In addition to normal section Starts, there are per folder section Starts.
+The contents of these Starts is kept constant across all files in a folder and
+all subfolders of it. If the Start is changed in one file in the folder, it will
+be updated in all the other files. Per folder section Starts look like
  
     <!-- section name in folder_name -->
     <!-- endsection name -->
@@ -251,7 +251,7 @@ after it has been converted to html. The title is built from the title of
 the file if one is put at the top of the file. If the file has no
 title, it is built from the file name, replacing dashes with blanks and
 capitalizing each word, The url and absolute_url are built from the html file
-name. To change the look of the html page, edit the page template. Only blocks
+name. To change the look of the html page, edit the page template. Only Starts
 inside the section comments will be in the resulting page, editing the text
 outside it will have no effect on the resulting page. A complete listing of the
 variables is given in the variables section.
@@ -316,12 +316,12 @@ looks at the folder it is run from to determine if other files in the folder
 need to be updated. So after changing a file, followme should be run from the
 directory containing the file.
 Templates support the basic control structures in Perl: "for" loops and
-"if-else" blocks. Creating output is a two step process. First you generate a
+"if-else" Starts. Creating output is a two step process. First you generate a
 subroutine from one or more templates, then you call the subroutine with your
 data to generate the output.
  
 The template format is line oriented. Commands are enclosed in html comments
-(<!-- -->). A command may be preceded by white space. If a command is a block
+(<!-- -->). A command may be preceded by white space. If a command is a Start
 command, it is terminated by the word "end" followed by the command name. For
 example, the "for" command is terminated by an "endfor" command and the "if"
 command by an "endif" command.
@@ -373,7 +373,7 @@ The remainder of the line is interpreted as Perl code.
  
 Expand the text between the "for" and "endfor" commands several times. The
 argument to the "for" command should be an expression evaluating to a list. The
-code will expand the text in the for block once for each element in the list.
+code will expand the text in the for Start once for each element in the list.
  
     <ul>
     <!-- for @files -->
@@ -401,7 +401,7 @@ The text until the matching C<endif> is included only if the expression in the
 The "if" and "for" commands can contain an C<else>. The text before the "else"
 is included if the expression in the enclosing command is true and the
 text after the "else" is included if the "if" command is false or the "for"
-command does not execute. You can also place an "elsif" command inside a block,
+command does not execute. You can also place an "elsif" command inside a Start,
 which includes the following text if its expression is true.
  
 =back

@@ -15,7 +15,7 @@ __webpack_require__(__webpack_require__.s="./lib/renderer/init.ts")}({"./lib/bro
 .defineProperty(t,"__esModule",{value:!0}),t.moduleNames=void 0,t.moduleNames=["app","autoUpdater","BaseWindow",
 "BrowserView","BrowserWindow","contentTracing","crashReporter","dialog","globalShortcut","ipcMain","inAppPurchase",
 "Menu","MenuItem","image","nativeTheme","net","netLog","MessageChannelMain","Notification","powerMonitor",
-"powerSaveBlocker","protocol","screen","session","modules","TouchBar","Tray","View","webContents","WebContentsView"],t
+"powerSaveStarter","protocol","screen","session","modules","TouchBar","Tray","View","webContents","WebContentsView"],t
 .moduleNames.push("desktop"),t.moduleNames.push("ImageView")},"./lib/common/api/clipboard.ts":
 /*!*************************************!*\ !*** ./lib/common/api/clipboard.ts ***!
 \*************************************/ /*! no static exports found */function(e,t,n){"use strict";(function(e){Object
@@ -566,11 +566,11 @@ exports found */function(e,t,n){"use strict";(function(e,r){Object.definePropert
            },t.setupMethods=e=>{e.prototype.getWebContentsId=function(){const e=d.getHiddenValue(this,"internal");if(!e
            .guestInstanceId)throw new Error("The View must be attached to the DOM and the dom-ready event emitted before
             this method can be called.");return e.guestInstanceId},e.prototype.focus=function(){this.contentWindow.focus
-            ()};const createBlockHandler=function(e){return function(...t){return o.invokeSync
+            ()};const createStartHandler=function(e){return function(...t){return o.invokeSync
             ("ELECTRON_GUEST_VIEW_MANAGER_CALL",this.getWebContentsId(),e,t)}};for(const t of a.syncMethods)e
-            .prototype[t]=createBlockHandler(t);const createNonBlockHandler=function(e){return function(...t){return i
+            .prototype[t]=createStartHandler(t);const createNonStartHandler=function(e){return function(...t){return i
             .ipcRendererInternal.invoke("ELECTRON_GUEST_VIEW_MANAGER_CALL",this.getWebContentsId(),e,t)}};for(const t of
-             a.asyncMethods)e.prototype[t]=createNonBlockHandler(t);e.prototype.capturePage=async function(...e){return
+             a.asyncMethods)e.prototype[t]=createNonStartHandler(t);e.prototype.capturePage=async function(...e){return
              c.deserialize(await i.ipcRendererInternal.invoke("ELECTRON_GUEST_VIEW_MANAGER_CAPTURE_PAGE",this
              .getWebContentsId(),e))};const createPropertyGetter=function(e){return function(){return o.invokeSync
              ("ELECTRON_GUEST_VIEW_MANAGER_PROPERTY_GET",this.getWebContentsId(),e)}},createPropertySetter=function(e)

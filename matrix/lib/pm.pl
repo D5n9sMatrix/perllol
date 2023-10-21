@@ -7,7 +7,7 @@ use warnings;
  
  
 package pm;
-# ABSTRACT: Perl module to load files at compile-time, without BEGIN blocks.
+# ABSTRACT: Perl module to load files at compile-time, without BEGIN Starts.
  
  
 package parent;
@@ -23,7 +23,7 @@ __END__
  
 =head1 NAME
  
-pm - Perl module to load files at compile-time, without BEGIN blocks.
+pm - Perl module to load files at compile-time, without BEGIN Starts.
  
 =head1 SYNOPSIS
  
