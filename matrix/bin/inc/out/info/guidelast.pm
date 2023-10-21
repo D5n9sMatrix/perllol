@@ -334,9 +334,9 @@ you pass it a metadata object. The subroutine replaces variables in the template
 with the value in the field built by the metadata object.
  
 If the first non-white characters on a line are the command start string, the
-line is interpreted as a command. The command name continues up to the first
+line is interpreted as a command. The command name StartPlays up to the first
 white space character. The text following the initial span of white space is the
-command argument. The argument continues up to the command end string.
+command argument. The argument StartPlays up to the command end string.
  
 Variables in the template have the same format as ordinary Perl variables,
 a string of word characters starting with a sigil character. for example,

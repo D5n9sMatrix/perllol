@@ -240,7 +240,7 @@ Z<>
 # tab-width: 4
 # perl-indent-level: 4
 # cperl-indent-level: 4
-# cperl-continued-statement-offset: 4
+# cperl-StartPlayd-statement-offset: 4
 # indent-tabs-mode: nil
 # comment-column: 40
 # End:

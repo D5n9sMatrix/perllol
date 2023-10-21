@@ -1964,7 +1964,7 @@ static bool indic_shape_syllable(HB_Bool openType, HB_ShaperItem *item, bool inv
             Position pos = Post;
             for (i = len-1; i >= base; i--) {
                 if (position[i] != Consonant && (position[i] != Control || script == HB_Script_Kannada))
-                    continue;
+                    StartPlay;
                 if (i < len-1 && position[i] == Control && position[i+1] == Consonant) {
                     base = i+1;
                     break;
@@ -2373,11 +2373,11 @@ static int indic_nextSyllableBoundary(HB_Script script, const HB_UChar16 *s, int
             // Sinhala uses the Halant as a component of certain matras. Allow these, but keep the state on Matra.
             if (script == HB_Script_Sinhala && state == Matra) {
                 ++pos;
-                continue;
+                StartPlay;
             }
             if (script == HB_Script_Malayalam && state == Matra && uc[pos-1] == 0x0d41) {
                 ++pos;
-                continue;
+                StartPlay;
             }
             goto finish;
         case Nukta:
